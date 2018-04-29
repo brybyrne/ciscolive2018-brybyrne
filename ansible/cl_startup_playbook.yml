@@ -1,0 +1,121 @@
+---
+- name: Provision IOS XE Devices
+  hosts: all
+  connection: local
+
+  tasks:
+
+    - name: Pause to complete boot
+      pause:
+        seconds: 5
+
+    - name: Enable IOX Service
+      ios_config:
+        provider:
+          host: "{{mgmt_ip}}"
+          port: "{{ssh_port}}"
+          username: "{{username}}"
+          password: "{{password}}"
+        lines:
+          - iox
+
+    - name: Configure NETCONF and RESTCONF
+      ios_config:
+        provider:
+          host: "{{mgmt_ip}}"
+          port: "{{ssh_port}}"
+          username: "{{username}}"
+          password: "{{password}}"
+        lines:
+          - netconf-yang
+          - netconf-yang cisco-odm polling-enable
+          - restconf
+          - ip http server
+          - ip http secure-server
+      register: output_interfaces
+
+    - name: Pause for NETCONF/RESTCONF to start
+      pause:
+        seconds: 45
+
+    - name: Generate NETCONF Ethernet config
+      with_items: "{{interfaces}}"
+      template:
+        src: "netconf_eth_interface_template.j2"
+        dest: "./{{inventory_hostname}}-{{item.interface_type}}{{item.interface_id}}.xml"
+
+    - name: Configure Ethernet Interfaces
+      with_items: "{{interfaces}}"
+      netconf_config:
+        host: "{{mgmt_ip}}"
+        port: "{{netconf_port}}"
+        hostkey_verify: false
+        username: "{{username}}"
+        password: "{{password}}"
+        #Ansible 2.4 version of the NETCONF module supports reading in NETCONF Files
+        src: "./{{inventory_hostname}}-{{item.interface_type}}{{item.interface_id}}.xml"
+
+    - name: Generate NETCONF VirtualPortGroup config
+      with_items: "{{vpg_interfaces}}"
+      template:
+        src: "netconf_virt_interface_template.j2"
+        dest: "./{{inventory_hostname}}-{{item.interface_type}}{{item.interface_id}}.xml"
+
+    - name: Configure VirtualPortGroup Interfaces
+      with_items: "{{vpg_interfaces}}"
+      netconf_config:
+        host: "{{mgmt_ip}}"
+        port: "{{netconf_port}}"
+        hostkey_verify: false
+        username: "{{username}}"
+        password: "{{password}}"
+        #Ansible 2.4 version of the NETCONF module supports reading in NETCONF Files
+        src: "./{{inventory_hostname}}-{{item.interface_type}}{{item.interface_id}}.xml"
+
+    - name: Configure NAT
+      netconf_config:
+        host: "{{mgmt_ip}}"
+        port: "{{netconf_port}}"
+        hostkey_verify: false
+        username: "{{username}}"
+        password: "{{password}}"
+        #Ansible 2.4 version of the NETCONF module supports reading in NETCONF Files
+        src: "./netconf_nat_config.xml"
+
+    - name: Add NAT Statement to VirtualPortGroup
+      ios_config:
+        provider:
+          host: "{{mgmt_ip}}"
+          port: "{{ssh_port}}"
+          username: "{{username}}"
+          password: "{{password}}"
+        parents: "interface VirtualPortGroup0"
+        lines:
+          - interface VirtualPortGroup0
+
+    - name: Configure Guestshell if not present run with when
+      ios_config:
+        provider:
+          host: "{{mgmt_ip}}"
+          port: "{{ssh_port}}"
+          username: "{{username}}"
+          password: "{{password}}"
+        lines:
+          - app-hosting appid guestshell
+          - vnic gateway1 virtualportgroup 0 guest-interface 0 guest-ipaddress 192.168.35.2 netmask 255.255.255.0 gateway 192.168.35.1 name-server 8.8.8.8 default
+          - resource profile custom cpu 1500 memory 512
+
+    - name: Pause to Complete Start-up
+      pause:
+       seconds: 30
+
+    - name: Enable Guestshell if not running
+      ios_command:
+        provider:
+          host: "{{mgmt_ip}}"
+          port: "{{ssh_port}}"
+          username: "{{username}}"
+          password: "{{password}}"
+          timeout: 120
+        commands:
+          - guestshell enable

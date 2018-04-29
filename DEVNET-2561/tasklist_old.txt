@@ -1,0 +1,25 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Task 1 - Where to get YANG Models
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+open https://github.com/YangModels/yang
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Task 2 - Viewing Standard YANG Models
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+pyang -f tree ietf-interfaces.yang
+pyang -f tree cisco-platform-software.yang
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Task 3 - YANG Model Augmentation and Devisations
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+pyang -f tree ietf-ip.yang
+more cisco-xe-ietf-ip-deviation.yang
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Task 4 - YANG Data Models
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+python get_itnerfaces_yang.py

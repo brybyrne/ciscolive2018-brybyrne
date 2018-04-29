@@ -1,0 +1,16 @@
+<config>
+  <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+    <interface>
+      <name>GigabitEthernet2</name>
+      <description>**THIS IS INTERFACE 2**</description>
+      <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
+      <enabled>true</enabled>
+      <ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip">
+        <address>
+          <ip>172.16.20.1</ip>
+          <netmask>255.255.255.0</netmask>
+        </address>
+      </ipv4>
+    </interface>
+  </interfaces>
+</config>
