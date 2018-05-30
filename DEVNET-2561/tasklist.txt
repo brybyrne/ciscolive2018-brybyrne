@@ -2,6 +2,7 @@
 Task 1 - Where to get YANG Models
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+cd code
 open https://github.com/YangModels/yang
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -22,7 +23,7 @@ more cisco-xe-ietf-ip-deviation.yang
 Task 4 - YANG Data Models
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-python get_itnerfaces_yang.py
+python get_interfaces_yang.py
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Task 5 - Saying Hello with NETCONF
@@ -62,7 +63,7 @@ more get_config_filter.xml
 
 Third:
 python get_config_xpath.py
-More get_config_xpath.py
+more get_config_xpath.py
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -70,5 +71,5 @@ Task 8 - Retrieving Interface Configuration
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 cd ..
-cleanup.sh
+./cleanup.sh
 
