@@ -2,6 +2,7 @@
 Task 1 - Where to get YANG Models
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+cd code
 open https://github.com/YangModels/yang
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -22,7 +23,7 @@ more cisco-xe-ietf-ip-deviation.yang
 Task 4 - YANG Data Models
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-python get_itnerfaces_yang.py
+python get_interfaces_yang.py
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Task 5 - Constructing RESTCONF URIs
@@ -103,4 +104,5 @@ python make_python.py
 Task 10 - Lab Cleanup
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+cd ..
 ./cleanup.sh
