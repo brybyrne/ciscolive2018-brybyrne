@@ -111,4 +111,9 @@ cd ..
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Bonus Content
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+To View Yang Modules
 https://127.0.0.1:2225/restconf/data/ietf-yang-library:modules-state
+
+To See RESTCONF Store
+https://127.0.0.1:2225/.well-known/host-meta
+Content-Type/Accept application/xrd+xml
