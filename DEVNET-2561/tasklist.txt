@@ -1,4 +1,4 @@
-/@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Task 1 - Where to get YANG Models
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -57,19 +57,19 @@ more get_config_filter.py
 
 
 Second:
-python get_config_filter.py
+python get_config_file.py
 more get_config_filter.py
 more get_config_filter.xml
 
 Third:
 python get_config_xpath.py
-more get_config_xpath.py
+more get_config_filter.xml
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Task 8 - Retrieving Interface Configuration
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-cd ..
-./cleanup.sh
+
+
 
