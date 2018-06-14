@@ -34,7 +34,7 @@ PORT = 2223
 # use the user credentials for your IOS-XE device
 USER = 'vagrant'
 PASS = 'vagrant'
-FILE = 'get_config_filter.xml'
+FILE = 'get_config_file.xml'
 
 
 # create a main() method
